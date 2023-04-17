@@ -45,10 +45,9 @@ const options = {
 
 export function ProtocolChart() {
   return(
-    <div style={{ width: '20%', height: '20%'}}>
-        <p style={{color: '#094292', fontSize: 18, textAlign: 'center'}}> Connections Detected </p>
+    <div style={{ width: 270, height: 270, cursor: 'default'}}>
+        <p style={{color: '#094292', fontSize: 18, textAlign: 'center'}}> Protocol Detected </p>
         <Radar data={data} options={options}/>
     </div>
-    
   ) ;
 }

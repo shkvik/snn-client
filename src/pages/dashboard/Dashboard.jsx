@@ -4,17 +4,20 @@ import './Dashboard.css';
 
 import ActivityChart from '../../components/activity-chart/ActivityChart';
 import { ProtocolChart } from '../../components/protocol-chart/ProtocolChart';
+import { ProgressChart } from '../../components/progress-chart/ProgressChart';
 
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Table, Progress, Badge} from 'antd';
+import { Button, Input, Space, Table, Progress, Badge, Divider } from 'antd';
 import { useRef, useState, Link, Text, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Highlighter from 'react-highlight-words';
+import LearningStep from '../../components/learning-step/LearningStep';
+
 
 
 function getStatusComponent(status){
   switch(status){
-    case "Learning": return <Badge status="success" text="Normal" />;
+    case "Learning": return <Badge status="processing" text="Learning" />;
   }
 }
 
@@ -253,19 +256,38 @@ const Dashboard = () => {
 
     return (
       <div style={{ width: '100%', height: '100%' }}>
+
+        <div style={
+          {
+            marginBottom: 30,
+            marginTop: 20,
+            marginLeft: '15%',
+            marginRight: '15%'
+          }}>
+          <LearningStep/>
+        </div>
+        <Divider/>
         <div style={
           { 
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: 50
+            marginBottom: 80,
+            marginLeft: '10%',
+            marginRight: '10%'
           }}>
         <ProtocolChart/>
+
+        <ProgressChart title={'Learning Nodes'} percent={80}/>
+        <ProgressChart title={'Learned Nodes'} percent={5}/>
+        <ProgressChart title={'Inactivated Nodes'} percent={15}/>
+
         </div>
-          
-          <Table columns={columns} dataSource={data}  onRow={(record) => ({
-              onClick: () => handleRowClick(record),})} />
+        
+        
+
+        <Table columns={columns} dataSource={data}  onRow={(record) => ({
+            onClick: () => handleRowClick(record),})} />
       </div>
     );
 };

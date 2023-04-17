@@ -97,14 +97,16 @@ const App: React.FC = () => {
   return (
     <Router>
       <Layout style={{ minHeight: '100vh' }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <Sider 
+          collapsible collapsed={collapsed}
+          onCollapse={(value) => setCollapsed(value)}>
           {/* <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)' }} /> */}
           <div style={{marginBottom: 60}} ></div>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
         </Sider>
         <Layout className="site-layout">
-          <Header style={{ padding: 0, background: colorBgContainer, fontWeight: 'bold', fontSize: 20 }}>
-            <div style={{ marginLeft: 16, color: '#094292'}}>
+          <Header style={{ padding: 0, background: colorBgContainer, fontSize: 20, cursor: 'default' }}>
+            <div style={{ marginLeft: 16, color: 'rgba(0, 0, 0, 0.58)', textAlign: 'center'}}>
               Security Neural Network Automated Process System
             </div>
             

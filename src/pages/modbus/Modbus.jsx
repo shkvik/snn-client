@@ -63,7 +63,7 @@ function InitModbusData(message){
         key: 0,
         direction: 'Functions Activity',
         // action: btnTrain(),
-        status:  <Badge status="success" text="Normal" />,
+        status:  <Badge status="processing" text="Learning" />,
         train: <Progress type="circle" size={50} percent={20} strokeColor={{ '0%': '#108ee9', '100%': '#87d068' }} />,
         activity: <ActivityChart guid={message.activityGuid}/>,
         data: message.functions,
@@ -73,7 +73,7 @@ function InitModbusData(message){
         key: 1,
         direction: 'Discrete Inputs',
         // action: btnTrain(),
-        status:  <Badge status="success" text="Normal" />,
+        status:  <Badge status="processing" text="Learning" />,
         train: <Progress type="circle" size={50} percent={90} strokeColor={{ '0%': '#108ee9', '100%': '#87d068' }} />,
         activity: <ActivityChart guid={message.discreteInputs[0].ts_guid} type={"Logic"}/>,
         data: message.discreteInputs,
@@ -83,7 +83,7 @@ function InitModbusData(message){
         key: 2,
         direction: 'Coils',
         // action: btnTrain(),
-        status:  <Badge status="success" text="Normal" />,
+        status:  <Badge status="processing" text="Learning" />,
         train: <Progress type="circle" size={50} percent={70} strokeColor={{ '0%': '#108ee9', '100%': '#87d068' }} />,
         activity: <ActivityChart guid={message.coils[0].ts_guid} type={"Logic"}/>,
         data: message.coils,
@@ -103,9 +103,9 @@ function InitModbusData(message){
         key: 4,
         direction: 'Holding Registers',
         // action: btnTrain(),
-        status:  <Badge status="error" text="Alert" />,
+        status:  <Badge status="success" text="Normal" />,
         train: <Progress type="circle" size={50} percent={0} strokeColor={{ '0%': '#108ee9', '100%': '#87d068' }} />,
-        activity: <ActivityChart guid={message.holdingRegisters[0].ts_guid}/>,
+        activity: <ActivityChart guid={message.holdingRegisters[2].ts_guid}/>,
         data: message.holdingRegisters,
     });
     console.log(data)
@@ -156,11 +156,11 @@ const Modbus = () => {
                     dataIndex: 'time_series',
                     key: 'time_series',
                 },
-                {
-                    title: 'Action',
-                    dataIndex: 'action',
-                    key: 'action',
-                },
+                // {
+                //     title: 'Action',
+                //     dataIndex: 'action',
+                //     key: 'action',
+                // },
             ];
     
             const btnsRegisters = () => {
@@ -255,11 +255,11 @@ const Modbus = () => {
                     dataIndex: 'activity',
                     key: 'activity'
                 },
-                {
-                    title: 'Action',
-                    dataIndex: 'action',
-                    key: 'action',
-                },
+                // {
+                //     title: 'Action',
+                //     dataIndex: 'action',
+                //     key: 'action',
+                // },
             ];
             
     
@@ -319,11 +319,11 @@ const Modbus = () => {
             dataIndex: 'activity',
             key: 'activity'
         },
-        {
-            title: 'Action',
-            dataIndex: 'action',
-            key: 'action',
-        },
+        // {
+        //     title: 'Action',
+        //     dataIndex: 'action',
+        //     key: 'action',
+        // },
     ];
 
     const confirm = () => {
