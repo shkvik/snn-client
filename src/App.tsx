@@ -5,12 +5,17 @@ import {
   PieChartOutlined,
   TeamOutlined,
   UserOutlined,
+  DashboardOutlined
 } from '@ant-design/icons';
+
+import Dashboard from './pages/dashboard/Dashboard';
+
 import type { MenuProps } from 'antd';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom';
 import { title } from 'process';
 import { Routes } from 'react-router-dom';
+import Modbus from './pages/modbus/Modbus';
 const { SubMenu } = Menu;
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -22,20 +27,24 @@ function getItem(
   label: any,
   key: string,
   icon?: React.ReactNode,
-  link?: string,
   children?: MenuItem[]
 ) : MenuItem {
   return {
     label,
     key,
     icon,
-    link,
     children,
   } as MenuItem;
 }
 
-var c = getItem('Option', '0', <PieChartOutlined />,'/about');
 
+const Home = () => {
+  return (
+    <div>
+      <h1>Главная страница</h1>
+    </div>
+  );
+};
 
 const About = () => {
   return (
@@ -47,19 +56,17 @@ const About = () => {
 
 
 const items: MenuItem[] = [
-  getItem((
-       <Link to="/about">О нас</Link>
-  ), '0', <PieChartOutlined />,'/about'),
-  getItem('Option 1', '1', <PieChartOutlined />,'/about'),
-
-  getItem('Option 2', '2', <DesktopOutlined />),
-  // getItem('User', 'sub1', <UserOutlined />, [
-  //   getItem('Tom', '3'),
-  //   getItem('Bill', '4'),
-  //   getItem('Alex', '5'),
-  // ]),
-  // getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
+  {
+    label: <Link to="/">Dashboard</Link>,
+    key: '228',
+    icon: <DashboardOutlined />,
+  },
+  {
+    label: <Link to="/about">About</Link>,
+    key: '0',
+    icon: <PieChartOutlined />,
+  },
+  
 ];
 
 
@@ -87,9 +94,13 @@ const App: React.FC = () => {
             </Breadcrumb>
             <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
               Bill is a cat.
+
               <Routes>
                 <Route path="/about" Component={About}/>
+                <Route path="/" Component={Dashboard}/>
+                <Route path="/modbus/:id" Component={Modbus}/>
               </Routes>
+
             </div>
 
           </Content>
