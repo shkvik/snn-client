@@ -3,6 +3,7 @@ import React from 'react';
 import './Dashboard.css';
 
 import ActivityChart from '../../components/activity-chart/ActivityChart';
+import { ProtocolChart } from '../../components/protocol-chart/ProtocolChart';
 
 import { SearchOutlined } from '@ant-design/icons';
 import { Button, Input, Space, Table, Progress, Badge} from 'antd';
@@ -252,6 +253,17 @@ const Dashboard = () => {
 
     return (
       <div style={{ width: '100%', height: '100%' }}>
+        <div style={
+          { 
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: 50
+          }}>
+        <ProtocolChart/>
+        </div>
+          
           <Table columns={columns} dataSource={data}  onRow={(record) => ({
               onClick: () => handleRowClick(record),})} />
       </div>

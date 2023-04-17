@@ -98,21 +98,21 @@ const App: React.FC = () => {
     <Router>
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-          <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)' }} />
+          {/* <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)' }} /> */}
+          <div style={{marginBottom: 60}} ></div>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
         </Sider>
         <Layout className="site-layout">
-          <Header style={{ padding: 0, background: colorBgContainer }} />
+          <Header style={{ padding: 0, background: colorBgContainer, fontWeight: 'bold', fontSize: 20 }}>
+            <div style={{ marginLeft: 16, color: '#094292'}}>
+              Security Neural Network Automated Process System
+            </div>
+            
+            </Header>
           <Content style={{ margin: '0 16px' }}>
 
-            {/* <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb> */}
             <BreadCrumbCustum/>
             <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }}>
-              Bill is a cat.
-
               <Routes>
                 <Route path="/about" Component={About}/>
                 <Route path="/" Component={Home}/>
