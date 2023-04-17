@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-  DashboardOutlined
+  DashboardOutlined,
+  SettingOutlined,
+  ToolOutlined,
+  StarOutlined,
+  DatabaseOutlined,
+  SearchOutlined,
+  InfoCircleOutlined,
+  HomeOutlined
 } from '@ant-design/icons';
 
 import Dashboard from './pages/dashboard/Dashboard';
@@ -73,16 +75,40 @@ const items: MenuItem[] = [
     icon: <DashboardOutlined />,
   },
   {
-    label: <Link to="/about">About</Link>,
+    label: <Link to="/about">Settings</Link>,
     key: '1',
-    icon: <PieChartOutlined />,
+    icon: <SettingOutlined />,
+  },
+  {
+    label: <Link to="/about">Tools</Link>,
+    key: '2',
+    icon: <ToolOutlined />,
+  },
+  {
+    label: <Link to="/about">Favorites</Link>,
+    key: '3',
+    icon: <StarOutlined />,
+  },
+  {
+    label: <Link to="/about">Archive</Link>,
+    key: '4',
+    icon: <DatabaseOutlined />,
+  },
+  {
+    label: <Link to="/about">Search</Link>,
+    key: '5',
+    icon: <SearchOutlined />,
+  },
+  {
+    label: <Link to="/about">About</Link>,
+    key: '6',
+    icon: <InfoCircleOutlined />,
   },
   {
     label: <Link to="/">Home</Link>,
-    key: '2',
-    icon: <PieChartOutlined />,
+    key: '7',
+    icon: <HomeOutlined />,
   },
-  
 ];
 
 
@@ -100,8 +126,12 @@ const App: React.FC = () => {
         <Sider 
           collapsible collapsed={collapsed}
           onCollapse={(value) => setCollapsed(value)}>
-          {/* <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)' }} /> */}
-          <div style={{marginBottom: 60}} ></div>
+          {/* <div style={{ height: 32, margin: 16, background: 'rgba(255, 255, 255, 0.2)' }}>
+            
+          </div> */}
+          <div style={{marginBottom: 10}} >
+
+          </div>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
         </Sider>
         <Layout className="site-layout">

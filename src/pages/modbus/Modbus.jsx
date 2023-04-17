@@ -104,7 +104,7 @@ function InitModbusData(message){
         direction: 'Holding Registers',
         // action: btnTrain(),
         status:  <Badge status="success" text="Normal" />,
-        train: <Progress type="circle" size={50} percent={0} strokeColor={{ '0%': '#108ee9', '100%': '#87d068' }} />,
+        train: <Progress type="circle" size={50} percent={100} strokeColor={{ '0%': '#108ee9', '100%': '#87d068' }} />,
         activity: <ActivityChart guid={message.holdingRegisters[2].ts_guid}/>,
         data: message.holdingRegisters,
     });
