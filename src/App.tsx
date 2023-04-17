@@ -24,6 +24,7 @@ import { useLocation } from 'react-router-dom';
 
 import { title } from 'process';
 import { Routes } from 'react-router-dom';
+import Developing from './pages/developing/Developing';
 
 const { SubMenu } = Menu;
 
@@ -75,30 +76,26 @@ const items: MenuItem[] = [
     icon: <DashboardOutlined />,
   },
   {
-    label: <Link to="/about">Settings</Link>,
+    label: <Link to="/developing">Settings</Link>,
     key: '1',
     icon: <SettingOutlined />,
   },
   {
-    label: <Link to="/about">Tools</Link>,
+    label: <Link to="/developing">Tools</Link>,
     key: '2',
     icon: <ToolOutlined />,
   },
   {
-    label: <Link to="/about">Favorites</Link>,
+    label: <Link to="/developing">Favorites</Link>,
     key: '3',
     icon: <StarOutlined />,
   },
   {
-    label: <Link to="/about">Archive</Link>,
+    label: <Link to="/developing">Archive</Link>,
     key: '4',
     icon: <DatabaseOutlined />,
   },
-  {
-    label: <Link to="/about">Search</Link>,
-    key: '5',
-    icon: <SearchOutlined />,
-  },
+  
   {
     label: <Link to="/about">About</Link>,
     key: '6',
@@ -108,6 +105,11 @@ const items: MenuItem[] = [
     label: <Link to="/">Home</Link>,
     key: '7',
     icon: <HomeOutlined />,
+  },
+  {
+    label: <Link to="/developing">Search</Link>,
+    key: '5',
+    icon: <SearchOutlined />,
   },
 ];
 
@@ -150,6 +152,7 @@ const App: React.FC = () => {
                 <Route path="/" Component={Home}/>
                 <Route path="/dashboard" Component={Dashboard}/>
                 <Route path="/dashboard/modbus/:id" Component={Modbus}/>
+                <Route path="/developing" Component={Developing}/>
               </Routes>
 
             </div>
