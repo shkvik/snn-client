@@ -214,7 +214,7 @@ const Dashboard = () => {
       let navigate = useNavigate();
 
       const handleRowClick = (record) => {
-        navigate(`/modbus/${record.id}`);
+        navigate(`/dashboard/modbus/${record.id}`);
       };
 
       useEffect(() => {
