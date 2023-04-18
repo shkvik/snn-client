@@ -25,20 +25,24 @@ function getTrainedComponent(trained){
   return <Progress percent={trained} steps={5} />;
 }
 
-function parseData(data) {
+function parseData(data, callBack, component) {
   var dataConnections = new Array();
 
   data.forEach(function(value, index) {
-      console.log(value);
+      //console.log(value);
       dataConnections.push({
-        key: index + 1,
+        key: index,
         id: value.guid,
         client: value.client,
         server: value.server,
         protocol: value.protocol,
         trained: getTrainedComponent(value.trained),
         status: getStatusComponent(value.status),
-        activity: <ActivityChart guid={value.timeSeriasGuid}/>
+        activity: <ActivityChart
+                    rowKey={index} 
+                    callback={callBack} 
+                    guid={value.timeSeriasGuid}
+                    />
       });
       
   });
@@ -48,12 +52,32 @@ function parseData(data) {
 
 const Dashboard = () => {
 
-    const [data, setData] = useState(null);
+    const dashboardRef = useRef();
+
+    dashboardRef.current = Dashboard;
+
+    const [data, setDataDashboard] = useState(null);
     const [socket, setSocket] = useState(null);
 
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
     
+    const delegateChangeTableValue = (key, newValue) => {
+      
+      setDataDashboard(prevData => {
+        // Клонируем текущий массив данных
+        const newData = [...prevData];
+        // Находим индекс строки с соответствующим ключом
+        const rowIndex = newData.findIndex(item => item.key === key);
+        // Если индекс найден, обновляем значение в этой строке
+        if (rowIndex !== -1) {
+          newData[rowIndex].status = newValue;
+        }
+        // Возвращаем новый массив данных
+        return newData;
+      });
+    }
+
     const searchInput = useRef(null);
     const handleSearch = (selectedKeys, confirm, dataIndex) => {
       confirm();
@@ -221,6 +245,16 @@ const Dashboard = () => {
         navigate(`/dashboard/modbus/${record.id}`);
       };
 
+      const getRowClassName = (record) => {
+        // Проверяем значение статуса
+        if (record.status.props.status == "processing") {
+          // Возвращаем имя класса стиля, который изменит цвет строки на красный
+          return 'row-critical';
+        }
+        // Возвращаем пустую строку, если нет необходимости изменять стиль строки
+        return '';
+      };
+
       useEffect(() => {
         const ws = new WebSocket("ws://localhost:8080");
         setSocket(ws);
@@ -239,9 +273,8 @@ const Dashboard = () => {
         ws.onmessage = function(event) {
           var newData = JSON.parse(event.data);
           
-          newData = parseData(newData);
-          console.log(newData);
-          setData(newData);
+          newData = parseData(newData, delegateChangeTableValue);
+          setDataDashboard(newData);
           ws.close();
         };
 
@@ -286,8 +319,11 @@ const Dashboard = () => {
         
         
 
-        <Table columns={columns} dataSource={data}  onRow={(record) => ({
-            onClick: () => handleRowClick(record),})} />
+        <Table columns={columns}
+               dataSource={data}
+               //rowClassName={getRowClassName}
+               onRow={(record) => ({onClick: () => handleRowClick(record)})}
+             />
       </div>
     );
 };
